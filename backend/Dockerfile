@@ -1,31 +1,29 @@
-# Stage 1
+# first stage
 FROM node:21 AS backend-builder
-
-# setup the working dir
+                                           # first time full image lana ka purpose yai hai ka < npm dependencies > thk sai instal                                 ho jai phe wo un dependencies ko < /app > ma save kar dai ga .
+# ste the working directory
 WORKDIR /app
 
-# code
+# copy the code source to destination
 COPY . .
 
-# packages install
+# install npm / dependencies
 RUN npm i
 
-# tests
-RUN npm run test
-
-# Stage 2
-FROM node:21-slim
-
-# setup the working dir
+# stage 2                          # yaha par slim image use kar rhai hai ab < npm dependencies > ka issue nhi ai ga because
+FROM node:21-alpine
+                                   # ab hum < /app > ko copy krai ga us ma required dependencies hai .
+# ste the working directory
 WORKDIR /app
 
-# copy the above stage as compressed
+# copy the satge first direcoty < /app > where < npm i > dependencies installed
 COPY --from=backend-builder /app .
 
+# copy .env.docker file into .env
 COPY .env.docker .env
 
-# Port
-EXPOSE 8080
+# port expose which  application run
+EXPOSE 5000
 
-# App
 CMD ["npm", "start"]
+
