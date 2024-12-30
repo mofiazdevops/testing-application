@@ -9,7 +9,9 @@ COPY . .
 
 # install npm / dependencies
 RUN npm i
-
+# test intigrate with Dockerfile
+RUN npm run test                   
+                        # yai hum code sai pata chala hai test ka us ma < test dir > --> backend --> package.json --> test , hai , or npm node.js ka project hai  es lia npm asa chal rha hai 
 # stage 2                          # yaha par slim image use kar rhai hai ab < npm dependencies > ka issue nhi ai ga because
 FROM node:21-alpine
                                    # ab hum < /app > ko copy krai ga us ma required dependencies hai .
