@@ -12,6 +12,9 @@ COPY . .
 # Install dependencies
 RUN npm i
 
+# integrat test 
+RUN npm run test
+
 # Stage 2
 FROM node:21-alpine
 
