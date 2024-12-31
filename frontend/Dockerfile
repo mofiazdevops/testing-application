@@ -14,6 +14,8 @@ RUN npm i
 
 # Stage 2
 FROM node:21-alpine
+# set working dir
+WORKDIR /app
 
 # Copy the above satge directory < /app > where all dependency install
 COPY --from=frontend-builder /app .
